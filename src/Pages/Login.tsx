@@ -84,7 +84,7 @@ const Login: React.FC = () => {
             <Form >
               <Stack spacing={2} sx={{ maxWidth: '300px', margin: 'auto' }}>
                 <InputComponent id="email" label="Email" placeholder="Please enter email address" />
-                <InputComponent id="password" label="Password" placeholder="Please enter password" />
+                <InputComponent id="password" type='password' label="Password" placeholder="Please enter password" />
                 {/* Submit Button */}
 
                 <Button type='submit' disabled={loading} variant="contained" style={{ width: 'fit-content', margin: 'auto', marginTop: '24px' }}>{loading ? "Loading..." : "Submit"}</Button>

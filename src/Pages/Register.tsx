@@ -98,7 +98,7 @@ const Register: React.FC = () => {
             <Stack spacing={2} sx={{ maxWidth: '300px', margin: 'auto' }}>
               <InputComponent id="username" label="Name" placeholder="Please enter name" />
               <InputComponent id="email" label="Email" placeholder="Please enter email address" />
-              <InputComponent id="password" label="Password" placeholder="Please enter password" />
+              <InputComponent id="password" type='password' label="Password" placeholder="Please enter password" />
 
               <Button
                 type="submit"
