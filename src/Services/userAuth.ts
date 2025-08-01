@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://13.233.65.182:5000/api/auth/'; 
+const API_URL = 'https://tvshow-app.onrender.com/api/auth/'; 
 
 // ✅ Login
 export const loginUser = (credentials: { email: string; password: string }) => {

@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { TVShow } from '../types/tvshow';
 
 
-const API_URL = 'http://13.233.65.182:5000/api/tvshows'; 
+const API_URL = 'https://tvshow-app.onrender.com/api/tvshows'; 
 // const API_URL = 'http://localhost:5000/api/tvshows'; 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('token');
