@@ -1,4 +1,4 @@
-import { CircularProgress, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Avatar } from '@mui/material';
+import { CircularProgress, Table, TableBody, TableCell,  TableHead, TableRow, IconButton,  } from '@mui/material';
 import { Edit, Delete } from '@mui/icons-material';
 import type { TVShow } from '../types/tvshow';
 
@@ -11,7 +11,7 @@ interface Props {
   onDelete: (id: string) => void;
 }
 
-export const TVShowTable = ({ shows, loadingMore, hasMore, loading, onEdit, onDelete }: Props) => {
+export const TVShowTable = ({ shows, loadingMore, hasMore, onEdit, onDelete }: Props) => {
   console.log(' loadingMore, hasMore, ', loadingMore, hasMore)
   return (
     <div

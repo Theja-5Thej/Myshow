@@ -3,7 +3,7 @@ import { TVShowForm } from '../Components/TVShowForm';
 import { TVShowTable } from '../Components/TVShowTable'
 import type { TVShow } from '../types/tvshow';
 import { useAuth } from '../Context/AuthProvider';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 
 import {
@@ -105,8 +105,7 @@ const Home = () => {
 
 
 
-  const handleSave = async (data: Partial<TVShow>, imageUrl?: string) => {
-    let posterUrl = imageUrl
+  const handleSave = async (data: Partial<TVShow>, posterUrl?: string) => {
 
 
     const finalData = { ...data, posterUrl };

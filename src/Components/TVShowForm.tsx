@@ -7,8 +7,7 @@ import { useEffect, useState } from 'react';
 import { tvShowSchema } from '../types/tvShowSchema';
 import type { TVShowFormSchema } from '../types/tvShowSchema'
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
-import { storage } from "../Firebase/firebase";
-import { v4 as uuidv4 } from "uuid";
+
 
 interface Props {
   onSubmit: (data: Partial<TVShow>, imageUrl?: string) => void;
@@ -61,7 +60,7 @@ export const TVShowForm = ({ onSubmit, closeModal, initialData = {} }: Props) =>
   return (
     <form
       onSubmit={handleSubmit(onFormSubmit)}
-      className="w-full max-w-xl mx-auto  shadow-md rounded-2xl p-6 md:p-8 space-y-6 mx-auto"
+      className="w-full max-w-xl mx-auto  shadow-md rounded-2xl p-6 md:p-8 space-y-6 "
     >
       <h1 className="text-2xl font-bold mb-4 text-sky-500">
         {Object.entries(initialData).length !== 0 ? 'Edit Show' : 'Add New Show'}

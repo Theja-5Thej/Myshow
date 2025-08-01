@@ -1,7 +1,6 @@
 // firebase.ts
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
   apiKey: "AIzaSyB37XDhMANKb29xL6Ow-Wadmpbg2ZIsI_U",
   authDomain: "tvshow-77b26.firebaseapp.com",
@@ -14,5 +13,4 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 export const storage = getStorage(app);

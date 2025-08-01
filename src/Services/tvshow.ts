@@ -1,6 +1,5 @@
 import axios from 'axios';
 import type { TVShow } from '../types/tvshow';
-import { useAuth } from '../Context/AuthProvider';
 
 
 const API_URL = 'http://13.233.65.182:5000/api/tvshows'; 

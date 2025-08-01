@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from '../Services/userAuth';
 import { AxiosError } from 'axios';
 import { useAuth } from '../Context/AuthProvider';
-import { grey } from '@mui/material/colors';
 const validationSchema = Yup.object({
   email: Yup.string()
     .email('Invalid email format')
@@ -81,7 +80,7 @@ const Login: React.FC = () => {
           }}
 
         >
-          {({ isSubmitting }) => (
+          {({  }) => (
             <Form >
               <Stack spacing={2} sx={{ maxWidth: '300px', margin: 'auto' }}>
                 <InputComponent id="email" label="Email" placeholder="Please enter email address" />

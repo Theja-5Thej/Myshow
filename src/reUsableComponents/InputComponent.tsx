@@ -1,5 +1,5 @@
 import React from 'react'
-import { Stack, Box, Typography, FormLabel, TextField } from '@mui/material';
+import { Stack,  FormLabel } from '@mui/material';
 import { ErrorMsg, StyledField } from '../style/styledComponents';
 interface InputComponentProps {
   label: string;
@@ -11,7 +11,7 @@ interface InputComponentProps {
 const InputComponent: React.FC<InputComponentProps> = ({
   label,
   placeholder = 'Enter value',
-  type = 'text',
+
   id = ''
 }) => {
   return (
