@@ -23,7 +23,8 @@ const Home = () => {
   const [loadingMore, setLoadingMore] = useState<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const LIMIT = 15;
-  const offsetRef = useRef(0)
+  const offsetRef = useRef(0);
+  const [triggerReload, setTriggerReload] = useState(false);
   const openForm = (show: TVShow | null = null) => {
     if (!isAuthenticated) {
       navigate('/login')
@@ -38,32 +39,30 @@ const Home = () => {
     setShowFormModal(false);
   };
 
-  const loadMore = useCallback(async () => {
-    if (loading || loadingMore || !hasMore) return;
+ const loadMore = async () => {
+  if (loading || loadingMore || !hasMore) return;
 
-    if (offsetRef.current === 0) setLoading(true);
-    else setLoadingMore(true);
+  if (offsetRef.current === 0) setLoading(true);
+  else setLoadingMore(true);
 
-    try {
-      const res = await fetchShows(LIMIT, offsetRef.current);
-      console.log(res);
+  try {
+    const res = await fetchShows(LIMIT, offsetRef.current);
+    const newShows = res.data;
 
-      const newShows = res.data;
+    setShows(prev => [...prev, ...newShows]);
+    offsetRef.current += newShows.length;
 
-      setShows(prev => [...prev, ...newShows]);
-      offsetRef.current += newShows.length;
-
-      if (!newShows.length || newShows.length < LIMIT || newShows.length === 0) {
-        console.log("Reached end. Setting hasMore = false", hasMore, loadingMore);
-        setHasMore(false);
-      }
-    } catch (error) {
-      console.error("Error loading more shows:", error);
-    } finally {
-      setLoading(false);
-      setLoadingMore(false);
+    if (!newShows.length || newShows.length < LIMIT) {
+      setHasMore(false);
     }
-  }, [loading, loadingMore, hasMore]);
+  } catch (error) {
+    console.error("Error loading more shows:", error);
+  } finally {
+    setLoading(false);
+    setLoadingMore(false);
+  }
+};
+
 
 
 
@@ -106,24 +105,29 @@ const Home = () => {
 
 
   const handleSave = async (data: Partial<TVShow>, posterUrl?: string) => {
+  const finalData = { ...data, posterUrl };
 
+  if (editingShow?.id) {
+    await updateShow(editingShow.id, finalData);
+  } else {
+    await createShow(finalData as TVShow);
+  }
 
-    const finalData = { ...data, posterUrl };
+  setEditingShow(null);
 
-    if (editingShow?.id) {
-      await updateShow(editingShow.id, finalData);
-    } else {
-      await createShow(finalData as TVShow);
-    }
+  offsetRef.current = 0;
+  setHasMore(true);
+  setShows([]);
 
-    setEditingShow(null);
+  setTriggerReload(true); // trigger reload through effect
+};
 
-    // ✅ Reset and reload from start
-    offsetRef.current = 0;
-    setHasMore(true);
-    setShows([]);
-    loadMore();  // reload initial shows with updated state
-  };
+  useEffect(() => {
+  if (triggerReload) {
+    loadMore();
+    setTriggerReload(false);
+  }
+}, [triggerReload, loadMore]);
 
 
   return (

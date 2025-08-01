@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import type { TVShow } from '../types/tvshow';
@@ -20,12 +20,16 @@ export const TVShowForm = ({ onSubmit, closeModal, initialData = {} }: Props) =>
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
     setValue, // ✅ this must be here
   } = useForm<TVShowFormSchema>({
     resolver: yupResolver(tvShowSchema),
+    defaultValues: {
+    type: 'Movie',
+  },
   });
 
   useEffect(() => {
@@ -74,17 +78,24 @@ export const TVShowForm = ({ onSubmit, closeModal, initialData = {} }: Props) =>
           fullWidth
         />
 
-        <TextField
-          select
-          label="Type"
-          {...register('type')}
-          error={!!errors.type}
-          helperText={errors.type?.message}
-          fullWidth
-        >
-          <MenuItem value="Movie">Movie</MenuItem>
-          <MenuItem value="TV Show">TV Show</MenuItem>
-        </TextField>
+        <Controller
+          name="type"
+          control={control}
+          defaultValue="Movie"
+          render={({ field }) => (
+            <TextField
+              select
+              label="Type"
+              {...field}
+              error={!!errors.type}
+              helperText={errors.type?.message}
+              fullWidth
+            >
+              <MenuItem value="Movie">Movie</MenuItem>
+              <MenuItem value="TV Show">TV Show</MenuItem>
+            </TextField>
+          )}
+        />
 
         <TextField
           label="Director"
